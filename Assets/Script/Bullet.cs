@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
         else if (collision.CompareTag("Enemy")) // Nếu bullet chạm enemy
         {
             collision.gameObject.SetActive(false); // Ẩn enemy, trả về pool
+            GameManager.Instance.AddKill(); // Cập nhật số lượng enemy bị tiêu diệt
             Destroy(gameObject); // Hủy bullet
         }
     }

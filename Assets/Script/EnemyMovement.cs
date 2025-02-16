@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime); // Di chuyển quái
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision)

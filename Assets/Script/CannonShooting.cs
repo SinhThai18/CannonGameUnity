@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CannonShooting : MonoBehaviour
 {
@@ -8,10 +9,15 @@ public class CannonShooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Click chuột trái để bắn
+        if (Time.timeScale == 0) return; // 🔴 Dừng toàn bộ nếu game đang Pause
+        if (EventSystem.current.IsPointerOverGameObject()) return; // Nếu chuột đang trên UI thì không bắn
+
+        if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Chuột trái được click! (Bắn)");
             Shoot();
         }
+      
     }
 
     void Shoot()
@@ -35,7 +41,6 @@ public class CannonShooting : MonoBehaviour
         if (rb != null)
         {
             rb.linearVelocity = shootDirection * bulletSpeed;
-
         }
     }
 }
