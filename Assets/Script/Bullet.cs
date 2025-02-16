@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -6,7 +6,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Boundary"))
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Hủy bullet khi chạm boundary
+        }
+        else if (collision.CompareTag("Enemy")) // Nếu bullet chạm enemy
+        {
+            collision.gameObject.SetActive(false); // Ẩn enemy, trả về pool
+            Destroy(gameObject); // Hủy bullet
         }
     }
 }

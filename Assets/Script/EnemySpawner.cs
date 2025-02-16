@@ -2,18 +2,21 @@
 
 public class EnemySpawner : MonoBehaviour
 {
-    public EnemyPool enemyPool; // Tham chiếu đến Pool
-    public Transform spawnPoint; // Điểm spawn
-    public float spawnInterval = 2f; // Thời gian spawn mỗi quái
+    public EnemyPool enemyPool;
+    public Transform spawnPoint;
+    public float spawnInterval = 2f;
 
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 0f, spawnInterval); // Tạo quái theo thời gian
+        InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
     }
 
     void SpawnEnemy()
     {
-        GameObject enemy = enemyPool.GetEnemy(); // Lấy Enemy từ pool
-        enemy.transform.position = spawnPoint.position; // Đặt vị trí spawn
+        GameObject enemy = enemyPool.GetEnemy();
+        if (enemy != null) // Chỉ spawn nếu còn enemy trong pool
+        {
+            enemy.transform.position = spawnPoint.position;
+        }
     }
 }

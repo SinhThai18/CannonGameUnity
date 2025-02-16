@@ -3,38 +3,35 @@ using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Prefab của Enemy
-    public int poolSize = 10; // Số lượng Enemy có sẵn trong pool
+    public GameObject enemyPrefab;
+    public int poolSize = 10;
 
-    private List<GameObject> enemyPool = new List<GameObject>(); // Danh sách chứa các Enemy
+    private List<GameObject> enemyPool = new List<GameObject>();
 
     void Start()
     {
-        // Tạo sẵn các Enemy và đưa vào pool
+        // Tạo sẵn enemy và đưa vào pool
         for (int i = 0; i < poolSize; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab);
-            enemy.SetActive(false); // Ẩn Enemy khi chưa dùng
+            enemy.SetActive(false);
             enemyPool.Add(enemy);
         }
     }
 
-    // Hàm lấy Enemy từ pool
+    // Hàm lấy enemy từ pool
     public GameObject GetEnemy()
     {
         foreach (GameObject enemy in enemyPool)
         {
-            if (!enemy.activeInHierarchy) // Tìm Enemy đang bị disable
+            if (!enemy.activeInHierarchy)
             {
                 enemy.SetActive(true);
                 return enemy;
             }
         }
 
-        // Nếu hết quái, tạo mới và thêm vào pool
-        GameObject newEnemy = Instantiate(enemyPrefab);
-        newEnemy.SetActive(true);
-        enemyPool.Add(newEnemy);
-        return newEnemy;
+        // Nếu không còn enemy trống trong pool, return null
+        return null;
     }
 }

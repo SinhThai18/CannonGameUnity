@@ -25,5 +25,10 @@ public class EnemyMovement : MonoBehaviour
 
         // Giảm vị trí y xuống 1 đơn vị
         transform.position = new Vector2(transform.position.x, transform.position.y - 1f);
+
+        // Lật enemy theo trục X
+        Vector3 newScale = transform.localScale;
+        newScale.x *= -1; // Đảo ngược trục X
+        transform.localScale = newScale;
     }
 }
